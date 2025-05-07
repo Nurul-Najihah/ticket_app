@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_app/widgets/app_column_text_layout.dart';
 import 'package:ticket_app/widgets/app_layoutbuilder_widget.dart';
