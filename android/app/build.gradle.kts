@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "com.example.ticket_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

@@ -6,6 +6,7 @@ import 'package:ticket_app/widgets/app_double_text.dart';
 
 import '../res/media.dart';
 import '../utils/all_json.dart';
+import '../widgets/heading_text.dart';
 import '../widgets/ticket_view.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(
                      height: 5,
                     ),
-                    Text("Book Tickets",style: AppStyles.headLineStyle1)
+                    const HeadingText(text: "Book Tickets",isColor: false)
                   ],
                 ),
                 Container(
@@ -80,8 +81,16 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
                 child: Row(
                   children: ticketList.map((singleTicket)=>
-                      TicketView(ticket: singleTicket)
-    ).toList(),
+                      GestureDetector(
+                        onTap: (){
+                          var index = ticketList.indexOf(singleTicket);
+
+                      print("I am tapped on the ticket $index");
+                    Navigator.pushNamed(context, "/ticket_screen",
+                    arguments: {"index":index});
+                        },
+                          child: TicketView(ticket: singleTicket))
+                          ).toList(),
     )
     ),
             const SizedBox(height:40),
@@ -94,8 +103,17 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: hotelList.map((singleHotel)=>
-                      Hotel(hotel: singleHotel))
+                  children:
+                  hotelList
+                      .take(2)
+                      .map((singleHotel)=>GestureDetector(
+                    onTap: (){
+                      var index = hotelList.indexOf(singleHotel);
+                      Navigator.pushNamed(context, "/hotel_detail", arguments:{
+                        "index":index
+                      });
+                    },
+                    child:    Hotel(hotel: singleHotel)))
                       .toList(),
                 )
                 )

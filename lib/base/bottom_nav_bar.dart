@@ -1,34 +1,28 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:ticket_app/controller/bottom_nav_controller.dart';
 import 'package:ticket_app/home/home_screen.dart';
+import 'package:ticket_app/screens/profile/profile.dart';
+import 'package:get/get.dart';
 
 import '../search/search_screen.dart';
 import '../search/ticket/ticket_screen.dart';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+class BottomNavBar extends StatelessWidget {
+   BottomNavBar({super.key});
 
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
+   final BottomNavController controller= Get.put(BottomNavController());
 
-class _BottomNavBarState extends State<BottomNavBar> {
   final appScreens = [
     const HomeScreen(fontSize: null,),
     const SearchScreen(),
     const TicketScreen(),
-    const Center(child: const Text("Profile")),
+    const ProfileScreen()
   ];
 
   //change our index for BottomNavBar
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index){
-    setState(() {
-      _selectedIndex = index;
-    });
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +31,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: appScreens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        //onTap: _onItemTapped,
         selectedItemColor: Colors.blueGrey,
         unselectedItemColor: const Color(0xFF526400),
         showSelectedLabels: false,
